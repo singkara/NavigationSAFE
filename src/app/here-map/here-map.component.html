@@ -1,1 +1,6 @@
-<div #map [style.width]="width" [style.height]="height"></div>
+<div #map [style.width]="width" [style.height]="height" style="float: left"></div>
+<ol style="float: left; width: 35%; min-height: 530px; margin-left: 20px; margin-top: 0">
+    <li *ngFor="let direction of directions">
+        <p [innerHTML]="direction.instruction"></p>
+    </li>
+</ol>

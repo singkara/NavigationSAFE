@@ -10,6 +10,9 @@ declare var H: any;
 export class AppComponent implements OnInit {
 
     private platform: any;
+    public start: string;
+    public finish: string;
+
 
     @ViewChild("map")
     public mapElement: ElementRef;
@@ -17,8 +20,10 @@ export class AppComponent implements OnInit {
     public constructor() {
         this.platform = new H.service.Platform({
             "app_id": "APP-ID-HERE",
-            "app_code": "APP-CODE-HERE"
+            "app_code": "APP-CODE-HERE"            
         });
+        this.start = "43.673640,-79.497160";
+        this.finish = "43.771912,-79.467728";
     }
 
     public ngOnInit() { }
