@@ -70,6 +70,7 @@ export class HereMapComponent implements OnInit, OnChanges {
             "waypoint0": "geo!" + this.start,
             "waypoint1": "geo!" + this.finish,
             "representation": "display"
+            ,"avoidareas": "43.751806,-79.533354;43.746133,-79.525370"
         }
         this.map.removeObjects(this.map.getObjects());
         this.router.calculateRoute(params, data => {

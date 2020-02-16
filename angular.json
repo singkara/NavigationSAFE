@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "here-project": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "here-project"
+    }
+  },
+  "defaultProject": "here-project",
+  "cli": {
+    "analytics": "fdc204ea-87b9-41b6-9547-54a7d807da17"
+  }
 }
