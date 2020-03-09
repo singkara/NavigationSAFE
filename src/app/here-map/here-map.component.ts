@@ -83,7 +83,7 @@ export class HereMapComponent implements OnInit, OnChanges {
             prox: position.lat + "," + position.lng,
             mode: "retrieveAddresses",
             maxresults: "1",
-            additionaldata: "IncludeShapeLevel,state"
+            additionaldata: "IncludeShapeLevel,postalCode"
         };
         this.geocodingService.reverseGeocode(
             reverseGeocodingParameters,

@@ -28,6 +28,11 @@ export class AppComponent implements OnInit {
 
     public ngOnInit() { }
 
+    public onMapClick(event: any) {
+        let position = this.mapElement.getPositionAt(event.clientX, event.clientY);
+        this.mapElement.highlightRegion(position);
+    }
+
     public ngAfterViewInit() {
         let defaultLayers = this.platform.createDefaultLayers();
         let map = new H.Map(
