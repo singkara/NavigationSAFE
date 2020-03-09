@@ -50,6 +50,9 @@ export class HereMapComponent implements OnInit, OnChanges {
 
     }
 
+
+
+
     public ngAfterViewInit() {
         let defaultLayers = this.platform.createDefaultLayers();
         this.map = new H.Map(
@@ -61,6 +64,8 @@ export class HereMapComponent implements OnInit, OnChanges {
             }
         );
         this.route(this.start, this.finish);
+        let mapEvent = new H.mapevents.MapEvents(this.map);
+        let behavior = new H.mapevents.Behavior(mapEvent);
     }
 
     public ngOnChanges(changes: SimpleChanges) {
