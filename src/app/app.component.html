@@ -1,4 +1,17 @@
-<div style="padding: 10px 0; color: #000">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+<style>
+.w3-lobster {
+  font-family: "Lobster", serif;
+}
+</style>
+<body>
+
+<div class="w3-container w3-lobster">
+<h4>  <em>NavigationSAFE<sup>TM</sup></em> 🍁 </h4>
+</div>
+<div style="padding: 10px 0; color: #00F">
     <div>
         <label style="display: inline-block; width: 60px; color: #000">Start</label>
         <input type="text" [(ngModel)]="start" />
@@ -8,4 +21,5 @@
         <input type="text" [(ngModel)]="finish" />
     </div>
 </div>
+
 <here-map appId="tcbcpvI5wjeLFwJzS6U4" appCode="2Tbul36EIo-mMNjeShHk5g" [start]="start" [finish]="finish" width="60%" height="530px"></here-map>
