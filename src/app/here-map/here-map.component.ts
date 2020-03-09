@@ -35,6 +35,8 @@ export class HereMapComponent implements OnInit, OnChanges {
     private platform: any;
     private map: any;
     private router: any;
+    private geocodingService: any;
+
     public constructor() { }
 
     public ngOnInit() {
@@ -44,6 +46,8 @@ export class HereMapComponent implements OnInit, OnChanges {
         });
         this.directions = [];
         this.router = this.platform.getRoutingService();
+        this.geocodingService = this.platform.getGeocodingService();
+
     }
 
     public ngAfterViewInit() {
@@ -52,7 +56,7 @@ export class HereMapComponent implements OnInit, OnChanges {
             this.mapElement.nativeElement,
             defaultLayers.normal.map,
             {
-                zoom: 4,
+                zoom: 5,
                 center: { lat: "37.0902", lng: "-95.7129" }
             }
         );
@@ -64,6 +68,56 @@ export class HereMapComponent implements OnInit, OnChanges {
             this.route(this.start, this.finish);
         }
     }    
+
+    public getPositionAt(x: number, y: number) {
+        return this.map.screenToGeo(x, y);
+    }    
+
+    public highlightRegion(position: any) {
+        let reverseGeocodingParameters = {
+            prox: position.lat + "," + position.lng,
+            mode: "retrieveAddresses",
+            maxresults: "1",
+            additionaldata: "IncludeShapeLevel,state"
+        };
+        this.geocodingService.reverseGeocode(
+            reverseGeocodingParameters,
+            success => {
+                let locations = success.Response.View[0].Result;
+                let shape = locations[0].Location.Shape.Value; 
+                this.map.removeObjects(this.map.getObjects());
+                let customStyle = {
+                    strokeColor: "black",
+                    fillColor: "rgba(0,175,170,0.5)",
+                    lineWidth: 2,
+                    lineJoin: "bevel"
+                };
+                let geometry = H.util.wkt.toGeometry(shape);
+                if(geometry instanceof H.geo.MultiGeometry) {
+                    let geometryArray = geometry.getGeometries();
+                    for (let i = 0; i < geometryArray.length; i++) {
+                        this.map.addObject(
+                            new H.map.Polygon(
+                                geometryArray[i].getExterior(),
+                                { style: customStyle }
+                            )
+                        );
+                    }
+                } else {            
+                    this.map.addObject(
+                        new H.map.Polygon(
+                            geometry.getExterior(),
+                            { style: customStyle }
+                        )
+                    );
+                } 
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    }
+
     public route(start: any, finish: any) {
         let params = {
             "mode": "fastest;car",
