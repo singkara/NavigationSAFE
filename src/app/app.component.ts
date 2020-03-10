@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { HereMapComponent } from "./here-map/here-map.component";
 
 declare var H: any;
 
@@ -12,10 +13,11 @@ export class AppComponent implements OnInit {
     private platform: any;
     public start: string;
     public finish: string;
+    
 
 
-    @ViewChild("map")
-    public mapElement: ElementRef;
+    @ViewChild("map", { static: false })
+    public mapElement: HereMapComponent;
 
     public constructor() {
         this.platform = new H.service.Platform({
@@ -33,10 +35,11 @@ export class AppComponent implements OnInit {
         this.mapElement.highlightRegion(position);
     }
 
+
     public ngAfterViewInit() {
         let defaultLayers = this.platform.createDefaultLayers();
         let map = new H.Map(
-            this.mapElement.nativeElement,
+            //this.mapElement.nativeElement,
             defaultLayers.normal.map,
             {
                 zoom: 10,

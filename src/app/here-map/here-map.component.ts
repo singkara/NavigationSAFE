@@ -9,7 +9,7 @@ declare var H: any;
 })
 export class HereMapComponent implements OnInit, OnChanges {
 
-    @ViewChild("map")
+    @ViewChild("map", { static: false })
     public mapElement: ElementRef;
 
     @Input()
@@ -50,7 +50,7 @@ export class HereMapComponent implements OnInit, OnChanges {
 
     }
 
-
+ 
 
 
     public ngAfterViewInit() {
@@ -63,10 +63,12 @@ export class HereMapComponent implements OnInit, OnChanges {
                 center: { lat: "37.0902", lng: "-95.7129" }
             }
         );
+
+        
         this.route(this.start, this.finish);
         let mapEvent = new H.mapevents.MapEvents(this.map);
         let behavior = new H.mapevents.Behavior(mapEvent);
-    }
+    } 
 
     public ngOnChanges(changes: SimpleChanges) {
         if((changes["start"] && !changes["start"].isFirstChange()) || (changes["finish"] && !changes["finish"].isFirstChange())) {
