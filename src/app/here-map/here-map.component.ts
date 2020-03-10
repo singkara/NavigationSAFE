@@ -39,9 +39,6 @@ export class HereMapComponent implements OnInit, OnChanges {
     public constructor() { }
 
     public ngOnInit() {
-        let fruits: string[] = ['Apple', 'Orange', 'Banana'];
-
-
         this.platform = new H.service.Platform({
             "app_id": this.appId,
             "app_code": this.appCode
@@ -49,7 +46,16 @@ export class HereMapComponent implements OnInit, OnChanges {
         this.directions = [];
         this.router = this.platform.getRoutingService();
         this.geocodingService = this.platform.getGeocodingService();
+        
     }
+    private heavyAccidentAreas = [{ lat : 43.641664, lng: -79.375976 }, // Waterfront
+        //{ lat : 43.747923, lng: -79.627957 }, // West Humber Claireville
+        { lat : 43.657291, lng: -79.384302 }, // Bay Street Corridor
+        { lat : 43.712449, lng: -79.292054 }, // Clairlea-Birchmount
+        { lat : 43.763559, lng: -79.280425 }, // Dorset Park , 
+        { lat : 43.742289, lng: -79.527437 }  // 400 Highway 
+
+    ]; 
 
     public ngAfterViewInit() {
         let defaultLayers = this.platform.createDefaultLayers();
@@ -62,8 +68,11 @@ export class HereMapComponent implements OnInit, OnChanges {
             }
         );
         this.route(this.start, this.finish);
-        let position = { lat : 43.757634, lng: -79.516820 };
-        this.highlightRegion(position)
+        for (let entry of this.heavyAccidentAreas) {
+            this.highlightRegion(entry)
+        }
+        //let position = { lat : 43.757634, lng: -79.516820 };
+        //this.highlightRegion(position)
     } 
 
     public ngOnChanges(changes: SimpleChanges) {
@@ -90,7 +99,7 @@ export class HereMapComponent implements OnInit, OnChanges {
             success => {
                 let locations = success.Response.View[0].Result;
                 let shape = locations[0].Location.Shape.Value; 
-                this.map.removeObjects(this.map.getObjects());
+                //this.map.removeObjects(this.map.getObjects());
                 let customStyle = {
                     strokeColor: "black",
                     fillColor: "rgba(0,175,170,0.5)",
@@ -159,6 +168,7 @@ export class HereMapComponent implements OnInit, OnChanges {
             console.error(error);
         });
     }
+
 
 
 }
