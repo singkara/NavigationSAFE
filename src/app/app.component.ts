@@ -27,6 +27,8 @@ export class AppComponent implements OnInit {
         this.start = "43.673640,-79.497160";
         this.finish = "43.771912,-79.467728";
     }
+    ngOnInit(): void {
+    }
 
 
 
