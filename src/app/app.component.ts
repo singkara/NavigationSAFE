@@ -21,31 +21,15 @@ export class AppComponent implements OnInit {
 
     public constructor() {
         this.platform = new H.service.Platform({
-            "app_id": "APP-ID-HERE",
-            "app_code": "APP-CODE-HERE"            
+            "app_id": "tcbcpvI5wjeLFwJzS6U4",
+            "app_code": "2Tbul36EIo-mMNjeShHk5g"            
         });
         this.start = "43.673640,-79.497160";
         this.finish = "43.771912,-79.467728";
     }
 
-    public ngOnInit() { }
-
-    public onMapClick(event: any) {
-        let position = this.mapElement.getPositionAt(event.clientX, event.clientY);
-        this.mapElement.highlightRegion(position);
-    }
 
 
-    public ngAfterViewInit() {
-        let defaultLayers = this.platform.createDefaultLayers();
-        let map = new H.Map(
-            //this.mapElement.nativeElement,
-            defaultLayers.normal.map,
-            {
-                zoom: 10,
-                center: { lat: 37.7397, lng: -121.4252 }
-            }
-        );
-    }
+
 
 }

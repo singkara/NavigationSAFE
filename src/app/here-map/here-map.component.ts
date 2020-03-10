@@ -1,5 +1,4 @@
 import { Component, OnInit, OnChanges, SimpleChanges, ViewChild, ElementRef, Input } from '@angular/core';
-
 declare var H: any;
 
 @Component({
@@ -40,6 +39,9 @@ export class HereMapComponent implements OnInit, OnChanges {
     public constructor() { }
 
     public ngOnInit() {
+        let fruits: string[] = ['Apple', 'Orange', 'Banana'];
+
+
         this.platform = new H.service.Platform({
             "app_id": this.appId,
             "app_code": this.appCode
@@ -47,11 +49,7 @@ export class HereMapComponent implements OnInit, OnChanges {
         this.directions = [];
         this.router = this.platform.getRoutingService();
         this.geocodingService = this.platform.getGeocodingService();
-
     }
-
- 
-
 
     public ngAfterViewInit() {
         let defaultLayers = this.platform.createDefaultLayers();
@@ -63,16 +61,16 @@ export class HereMapComponent implements OnInit, OnChanges {
                 center: { lat: "37.0902", lng: "-95.7129" }
             }
         );
-
-        
         this.route(this.start, this.finish);
-        let mapEvent = new H.mapevents.MapEvents(this.map);
-        let behavior = new H.mapevents.Behavior(mapEvent);
+        let position = { lat : 43.757634, lng: -79.516820 };
+        this.highlightRegion(position)
     } 
 
     public ngOnChanges(changes: SimpleChanges) {
         if((changes["start"] && !changes["start"].isFirstChange()) || (changes["finish"] && !changes["finish"].isFirstChange())) {
             this.route(this.start, this.finish);
+            let position = { lat : 43.757634, lng: -79.516820 };
+            this.highlightRegion(position)
         }
     }    
 
@@ -161,4 +159,6 @@ export class HereMapComponent implements OnInit, OnChanges {
             console.error(error);
         });
     }
+
+
 }

@@ -1,4 +1,4 @@
-<div #map style="width: 95vw; height: 80vh"></div>
+<div #map style="width: 95vw; height: 80vh" (click)="onMapClick($event)" ></div>
 <ol style="float: left; width: 35%; min-height: 530px; margin-left: 20px; margin-top: 0">
     <h5> Directions instructions:</h5>
     <li *ngFor="let direction of directions">
