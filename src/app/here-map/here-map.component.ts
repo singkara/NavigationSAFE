@@ -71,8 +71,6 @@ export class HereMapComponent implements OnInit, OnChanges {
         for (let entry of this.heavyAccidentAreas) {
             this.highlightRegion(entry)
         }
-        //let position = { lat : 43.757634, lng: -79.516820 };
-        //this.highlightRegion(position)
     } 
 
     public ngOnChanges(changes: SimpleChanges) {
@@ -133,13 +131,19 @@ export class HereMapComponent implements OnInit, OnChanges {
     }
 
     public route(start: any, finish: any) {
+
+
         let params = {
             "mode": "fastest;car",
             "waypoint0": "geo!" + this.start,
             "waypoint1": "geo!" + this.finish,
             "representation": "display"
-            ,"avoidareas": "43.751806,-79.533354;43.746133,-79.525370"
+            //,"avoidareas": "43.751806,-79.533354;43.746133,-79.525370"
+            //,"avoidareas": "43.723230,-79.496415;43.718903,-79.484892"
+
+            
         }
+
         this.map.removeObjects(this.map.getObjects());
         this.router.calculateRoute(params, data => {
             if(data.response) {
