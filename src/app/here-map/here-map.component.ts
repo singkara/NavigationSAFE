@@ -53,7 +53,10 @@ export class HereMapComponent implements OnInit, OnChanges {
         { lat : 43.657291, lng: -79.384302 }, // Bay Street Corridor
         { lat : 43.712449, lng: -79.292054 }, // Clairlea-Birchmount
         { lat : 43.763559, lng: -79.280425 }, // Dorset Park , 
-        { lat : 43.742289, lng: -79.527437 }  // 400 Highway 
+        { lat : 43.742289, lng: -79.527437 },  // 400 Highway 
+        {lat: 43.712718, lng:-79.508153}//43.712718, -79.508153
+
+
 
     ]; 
 
@@ -76,10 +79,10 @@ export class HereMapComponent implements OnInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges) {
         if((changes["start"] && !changes["start"].isFirstChange()) || (changes["finish"] && !changes["finish"].isFirstChange())) {
             this.route(this.start, this.finish);
-            let position = { lat : 43.757634, lng: -79.516820 };
             for (let entry of this.heavyAccidentAreas) {
                 this.highlightRegion(entry)
-            }        }
+            }
+        }
     }    
 
     public getPositionAt(x: number, y: number) {
@@ -138,8 +141,7 @@ export class HereMapComponent implements OnInit, OnChanges {
             "waypoint0": "geo!" + this.start,
             "waypoint1": "geo!" + this.finish,
             "representation": "display"
-            //,"avoidareas": "43.751806,-79.533354;43.746133,-79.525370"
-            //,"avoidareas": "43.723230,-79.496415;43.718903,-79.484892"
+            ,"avoidareas": "43.723230,-79.496415;43.718903,-79.484892"
 
             
         }
