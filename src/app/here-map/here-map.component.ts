@@ -77,8 +77,9 @@ export class HereMapComponent implements OnInit, OnChanges {
         if((changes["start"] && !changes["start"].isFirstChange()) || (changes["finish"] && !changes["finish"].isFirstChange())) {
             this.route(this.start, this.finish);
             let position = { lat : 43.757634, lng: -79.516820 };
-            this.highlightRegion(position)
-        }
+            for (let entry of this.heavyAccidentAreas) {
+                this.highlightRegion(entry)
+            }        }
     }    
 
     public getPositionAt(x: number, y: number) {
@@ -97,7 +98,6 @@ export class HereMapComponent implements OnInit, OnChanges {
             success => {
                 let locations = success.Response.View[0].Result;
                 let shape = locations[0].Location.Shape.Value; 
-                //this.map.removeObjects(this.map.getObjects());
                 let customStyle = {
                     strokeColor: "black",
                     fillColor: "rgba(0,175,170,0.5)",
